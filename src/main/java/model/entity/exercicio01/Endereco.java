@@ -2,31 +2,26 @@ package model.entity.exercicio01;
 
 public class Endereco {
 
-	private Integer id;
+	private int id;
 	private String rua;
 	private String cep;
 	private String estado;
 	private String cidade;
+	private String bairro;
+	private String numero;
+
+	public Endereco() {
+		
+	}
 	
-	public Endereco(Integer id, String rua, String cep, String estado, String cidade) {
+	public Endereco(String rua, String cep, String estado, String cidade, String bairro, String numero) {
 		super();
-		this.id = id;
 		this.rua = rua;
 		this.cep = cep;
 		this.estado = estado;
 		this.cidade = cidade;
-	}
-
-	public Endereco() {
-		super();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		this.bairro = bairro;
+		this.numero = numero;
 	}
 
 	public String getRua() {
@@ -60,5 +55,33 @@ public class Endereco {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	@Override
+	public String toString() {
+		return "Id: " + id +  " | Rua " + rua + ", " + numero + ", " + bairro + " - " + cep + " (" + cidade + "/" + estado + ")";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

@@ -1,32 +1,46 @@
 package model.entity.exercicio01;
 
 public class Telefone {
-
-	private Integer id;
+	private int id;
+	private Cliente cliente;
+	private String codigoPais;
 	private String ddd;
 	private String numero;
-	private boolean movel;
-	private Cliente dono;
-
-	public Telefone(Integer id, String ddd, String numero, boolean movel, Cliente dono) {
-		super();
-		this.id = id;
-		this.ddd = ddd;
-		this.numero = numero;
-		this.movel = movel;
-		this.dono = dono;
-	}
+	private String tipoLinha;
+	private boolean ativo;
 
 	public Telefone() {
+
+	}
+
+	public Telefone(Cliente cliente, String codigoPais, String ddd, String numero, String tipoLinha, boolean ativo) {
 		super();
+		this.cliente = cliente;
+		this.codigoPais = codigoPais;
+		this.ddd = ddd;
+		this.numero = numero;
+		this.tipoLinha = tipoLinha;
+		this.ativo = ativo;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
+	public Telefone(int id, Cliente cliente, String codigoPais, String ddd, String numero, String tipoLinha,
+			boolean ativo) {
+		super();
 		this.id = id;
+		this.cliente = cliente;
+		this.codigoPais = codigoPais;
+		this.ddd = ddd;
+		this.numero = numero;
+		this.tipoLinha = tipoLinha;
+		this.ativo = ativo;
+	}
+
+	public String getCodigoPais() {
+		return codigoPais;
+	}
+
+	public void setCodigoPais(String codigoPais) {
+		this.codigoPais = codigoPais;
 	}
 
 	public String getDdd() {
@@ -45,26 +59,45 @@ public class Telefone {
 		this.numero = numero;
 	}
 
-	public boolean isMovel() {
-		return movel;
+	public String getTipoLinha() {
+		return tipoLinha;
 	}
 
-	public void setMovel(boolean movel) {
-		this.movel = movel;
+	public void setTipoLinha(String tipoLinha) {
+		this.tipoLinha = tipoLinha;
 	}
 
-	public Cliente getDono() {
-		return dono;
+	public boolean isAtivo() {
+		return ativo;
 	}
 
-	public void setDono(Cliente dono) {
-		this.dono = dono;
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
 	public String toString() {
-		return "Telefone [id=" + id + ", ddd=" + ddd + ", numero=" + numero + ", movel=" + movel  
-				 + "dono=" + (dono != null ? dono.getNome() : "Sem dono") + "]";
+		return " id: " + id + " |idCliente: " + cliente.getId() + "| +" + codigoPais + "(" + ddd + ")" + numero
+				+ " - Linha: " + tipoLinha + " " + (ativo ? "Ativa" : "Inativa");
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setIdCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }
