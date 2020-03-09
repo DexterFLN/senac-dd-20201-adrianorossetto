@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Classe criada na disciplina de POO (2019/1).
@@ -64,10 +68,10 @@ import java.sql.Statement;
  */
 public class Banco {
 
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String BANCODADOS = "exemplos";
 	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS
-			+ "?useTimezone=true&serverTimezone=UTC";
+			+ "?useTimezone=true&serverTimezone=UTC&useSSL=false";
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
 
@@ -88,6 +92,7 @@ public class Banco {
 	 *                                incorretos.
 	 */
 	public static Connection getConnection() {
+		
 		try {
 			Connection conn = null;
 			Class.forName(DRIVER);
@@ -196,7 +201,7 @@ public class Banco {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			return stmt;
 		} catch (Exception e) {
-			System.out.println("Erro ao obter o PreparedStatement.");
+			System.out.println("Erro ao obter o PreparedStatement. Causa: " + e.getCause());
 			return null;
 		}
 	}
