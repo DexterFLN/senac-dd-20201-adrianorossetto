@@ -33,7 +33,7 @@ public class ClienteDAO {
 				int idGerado = rs.getInt(1);
 				novoCliente.setId(idGerado);
 			}
-			
+			System.out.println("Cliente cadastrado com sucesso!");
 			// TODO ao salvar um cliente temos que marcar os telefones que ele possui!
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo cliente.");

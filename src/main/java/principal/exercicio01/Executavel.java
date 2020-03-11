@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.bo.exercicio01.ClienteBO;
 import model.dao.exercicio01.ClienteDAO;
 import model.dao.exercicio01.EnderecoDAO;
+import model.dao.exercicio01.TelefoneDAO;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Endereco;
 import model.entity.exercicio01.Telefone;
@@ -18,10 +19,10 @@ public class Executavel {
 		
 		// TODO criar e SALVAR telefones
 				ArrayList<Telefone> telefones = new ArrayList<Telefone>();
-
-				// Exercício 2
-				//Cliente cliente1 = obterClienteDaTela();
 				Telefone telefone1 = cadastrarTelefoneDaTela();
+				// Exercício 2
+				//Cliente cliente1 = obterClienteDaTela(); 
+				
 
 				// - Salvar no banco (APENAS TESTES, AINDA VIOLANDO O MVC)
 				ClienteBO clienteBO = new ClienteBO();
@@ -47,30 +48,62 @@ public class Executavel {
 
 				Cliente novoCliente = new Cliente(nome, sobrenome, cpf, 
 						new ArrayList<Telefone>(), enderecoSelecionado);
-
+				ClienteBO cliBO = new ClienteBO();
+				cliBO.salvar(novoCliente);
+			
 				return novoCliente;
 			}
 			
 			private static Telefone cadastrarTelefoneDaTela() {
+						
 				String codigoPais = JOptionPane.showInputDialog("Informe o código telefônico do País: ");
 				String ddd = JOptionPane.showInputDialog("Informe o DDD do telefone: ");
 				String numero = JOptionPane.showInputDialog("Informe o número do telefone: ");
-				int movel = JOptionPane.showConfirmDialog(null, "Este número é de um telefone móvel?");
-				int dono = JOptionPane.showConfirmDialog(null, "Há proprietário para este número?");
 				
-				if (dono == 1) {
-					ClienteDAO clienteDAO = new ClienteDAO();
+				int isMovel = JOptionPane.showConfirmDialog(null, "Este telefone é móvel?", "Telefone", JOptionPane.YES_NO_OPTION);
+		        boolean movel = false;
+		        if(isMovel == 0) {
+		            System.out.println("O telefone é móvel");
+		            movel = true;
+		        } else if(isMovel == 1) {
+		            System.out.println("O telefone é fixo");
+		            movel = false;
+		        } else {
+		            System.out.println("Erro, processo cancelado.");
+		            JOptionPane.showMessageDialog(null, "Erro, processo cancelado.");
+		        }
+		        
+		        TelefoneDAO telDAO = new TelefoneDAO();
+		        Telefone novoTelefone = new Telefone();
+		        int isAtivo = JOptionPane.showConfirmDialog(null, "Há proprietário para esta linha?", "Telefone", JOptionPane.YES_NO_OPTION);
+		        boolean ativo = false;
+		        if(isAtivo == 0) {
+		        	ClienteDAO clienteDAO = new ClienteDAO();
 					ArrayList<Cliente> listaClientes = clienteDAO.consultarTodos();
 					Object[] clientes = listaClientes.toArray();
-					Cliente clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, 
+		        	System.out.println("O telefone está ativo. Tem proprietário.");
+		            ativo = true;
+		            Cliente clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, 
 							"Selecione um cliente: ", "Cliente", 
 							JOptionPane.QUESTION_MESSAGE, 
 							null, clientes, null);
-					
-				} else {
-					
-				}
-				return null;
+		           novoTelefone = new Telefone(0, clienteSelecionado, codigoPais, ddd, numero, movel, ativo);
+		           telDAO.salvar(novoTelefone); 
+		        } else if(isAtivo == 1) {
+		            System.out.println("O telefone está inativo. Não tem proprietário.");
+		            ativo = false;
+		            Cliente clienteVazio = new Cliente();
+		            novoTelefone = new Telefone(0, clienteVazio, codigoPais, ddd, numero, movel, ativo);
+			        telDAO.salvar(novoTelefone);
+		            
+		        } else {
+		            System.out.println("Erro, processo cancelado.");
+		            JOptionPane.showMessageDialog(null, "Erro, processo cancelado.");
+		        }
+		        
+		        
+		        
+			return novoTelefone;	
 			}
 
 }

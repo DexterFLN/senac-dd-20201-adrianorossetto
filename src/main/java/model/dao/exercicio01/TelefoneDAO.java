@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.dao.Banco;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Telefone;
@@ -40,9 +42,14 @@ public Telefone salvar(Telefone novoTelefone) {
 				int idGerado = generatedKeys.getInt(1);
 				novoTelefone.setId(idGerado);
 			}
+			System.out.println("Telefone cadastrado com sucesso!");
+			String mensagem = "Telefone salvo com sucesso";
+			JOptionPane.showMessageDialog(null, mensagem);
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo telefone.");
 			System.out.println("Erro: " + e.getMessage());
+			String mensagem = "Erro ao inserir novo telefone. Erro: " + e.getMessage();
+			JOptionPane.showMessageDialog(null, mensagem);
 		}
 
 		return novoTelefone;
