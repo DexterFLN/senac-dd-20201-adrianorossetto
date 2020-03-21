@@ -6,10 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Classe criada na disciplina de POO (2019/1).
@@ -73,7 +69,7 @@ public class Banco {
 	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS
 			+ "?useTimezone=true&serverTimezone=UTC&useSSL=false";
 	private static final String USER = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "admin";
 
 	public static final int CODIGO_RETORNO_ERRO_EXCLUSAO = 0;
 	public static final int CODIGO_RETORNO_SUCESSO_EXCLUSAO = 1;
@@ -92,7 +88,7 @@ public class Banco {
 	 *                                incorretos.
 	 */
 	public static Connection getConnection() {
-		
+
 		try {
 			Connection conn = null;
 			Class.forName(DRIVER);
