@@ -79,6 +79,12 @@ public class TelaExclusaoClientes {
 		frmExclusaoClientes.getContentPane().add(btnExcluirCliente);
 		
 		JButton btnCancelarExclusao = new JButton("Cancelar");
+		btnCancelarExclusao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuClientes.main(null);
+				frmExclusaoClientes.dispose();
+			}
+		});
 		btnCancelarExclusao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

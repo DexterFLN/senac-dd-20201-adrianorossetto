@@ -51,7 +51,7 @@ public class TelaCadastroEndereco extends JFrame {
 	public TelaCadastroEndereco() {
 		setTitle("Cadastro de endereço");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 220);
+		setBounds(100, 100, 470, 220);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,7 +90,7 @@ public class TelaCadastroEndereco extends JFrame {
 
 			}
 		});
-		btnSalvar.setBounds(105, 123, 117, 29);
+		btnSalvar.setBounds(50, 120, 120, 30);
 		contentPane.add(btnSalvar);
 
 		JButton btnLimpar = new JButton("Limpar");
@@ -100,7 +100,7 @@ public class TelaCadastroEndereco extends JFrame {
 			}
 
 		});
-		btnLimpar.setBounds(234, 123, 117, 29);
+		btnLimpar.setBounds(180, 120, 120, 30);
 		contentPane.add(btnLimpar);
 
 		txtRua = new JTextField();
@@ -145,6 +145,16 @@ public class TelaCadastroEndereco extends JFrame {
 		lblCamposObrigatorios.setFont(new Font("Lucida Grande", Font.ITALIC, 11));
 		lblCamposObrigatorios.setBounds(20, 164, 200, 16);
 		contentPane.add(lblCamposObrigatorios);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuEnderecos.main(null);
+				dispose();
+			}
+		});
+		btnVoltar.setBounds(310, 120, 120, 30);
+		contentPane.add(btnVoltar);
 	}
 
 	protected void limparCampos() {

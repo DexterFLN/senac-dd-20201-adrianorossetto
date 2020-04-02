@@ -131,6 +131,7 @@ public class TelaCadastroTelefone {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaMenuTelefones.main(null);
 				frmCadastroTelefone.dispose();
 			}
 			

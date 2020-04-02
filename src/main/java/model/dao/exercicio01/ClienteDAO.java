@@ -94,7 +94,7 @@ public class ClienteDAO {
 		return registrosAlterados > 0;
 	}
 
-	public Cliente consultarPorId(int id) {
+	public Cliente consultarPorId(int id) throws SQLException {
 		Connection conexao = Banco.getConnection();
 		String sql = " SELECT * FROM CLIENTE WHERE id = " + id;
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
@@ -110,7 +110,7 @@ public class ClienteDAO {
 			System.out.println("Erro ao consultar cliente com id: " + id);
 			System.out.println("Erro: " + e.getMessage());
 		}
-
+		conexao.close();
 		return cliente;
 	}
 

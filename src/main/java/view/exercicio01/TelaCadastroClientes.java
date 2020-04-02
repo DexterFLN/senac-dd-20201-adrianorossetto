@@ -114,6 +114,7 @@ public class TelaCadastroClientes {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaMenuClientes.main(null);
 				frmCadastroCliente.dispose();
 			}
 		});

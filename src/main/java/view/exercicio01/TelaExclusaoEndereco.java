@@ -47,7 +47,7 @@ public class TelaExclusaoEndereco {
 	private void initialize() {
 		frmExclusaoEnderecos = new JFrame();
 		frmExclusaoEnderecos.setTitle("Exclusão de endereços");
-		frmExclusaoEnderecos.setBounds(100, 100, 310, 200);
+		frmExclusaoEnderecos.setBounds(100, 100, 310, 150);
 		frmExclusaoEnderecos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmExclusaoEnderecos.getContentPane().setLayout(null);
 
@@ -70,7 +70,17 @@ public class TelaExclusaoEndereco {
 				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
-		btnExcluir.setBounds(30, 80, 240, 70);
+		btnExcluir.setBounds(50, 75, 90, 25);
 		frmExclusaoEnderecos.getContentPane().add(btnExcluir);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuEnderecos.main(null);
+				frmExclusaoEnderecos.dispose();
+			}
+		});
+		btnCancelar.setBounds(170, 75, 90, 25);
+		frmExclusaoEnderecos.getContentPane().add(btnCancelar);
 	}
 }

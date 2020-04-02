@@ -6,7 +6,6 @@ import model.bo.exercicio01.ClienteBO;
 import model.dao.exercicio01.ClienteDAO;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Endereco;
-import model.entity.exercicio01.Telefone;
 
 public class ClienteController {
 
