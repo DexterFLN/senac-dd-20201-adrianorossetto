@@ -20,6 +20,7 @@ public class TelaListagemClientes {
 	private JTable tblClientes;
 	private ArrayList<Cliente> clientes;
 	private String[] nomesColunas = { "Nome completo", "CPF", "Qtde. Telefones" };
+	private JButton btnVoltar;
 
 	private void limparTabelaClientes() {
 		tblClientes.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
@@ -83,11 +84,21 @@ public class TelaListagemClientes {
 				atualizarTabelaClientes();
 			}
 		});
-		btnBuscar.setBounds(280, 30, 120, 30);
+		btnBuscar.setBounds(230, 30, 120, 30);
 		frmListagemDeClientes.getContentPane().add(btnBuscar);
 
 		tblClientes = new JTable();
 		tblClientes.setBounds(25, 70, 650, 400);
 		frmListagemDeClientes.getContentPane().add(tblClientes);
+		
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuClientes.main(null);
+				frmListagemDeClientes.dispose();
+			}
+		});
+		btnVoltar.setBounds(400, 30, 120, 30);
+		frmListagemDeClientes.getContentPane().add(btnVoltar);
 	}
 }

@@ -1,10 +1,14 @@
 package controller.exercicio01;
 
+import java.util.ArrayList;
+
 import model.bo.exercicio01.TelefoneBO;
+import model.dao.exercicio01.TelefoneDAO;
 import model.entity.exercicio01.Telefone;
 
 public class TelefoneController {
 	
+	private TelefoneDAO dao = new TelefoneDAO();
 	private TelefoneBO bo = new TelefoneBO();
 
 	/**
@@ -56,6 +60,10 @@ public class TelefoneController {
 		// TODO desenvolver
 
 		return "";
+	}
+
+	public ArrayList<Telefone> listarTodosOsTelefones() {
+		return dao.consultarTodos();
 	}
 
 }

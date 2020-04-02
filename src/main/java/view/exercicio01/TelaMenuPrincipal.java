@@ -41,7 +41,7 @@ public class TelaMenuPrincipal {
 	private void initialize() {
 		frmMenuPrincipal = new JFrame();
 		frmMenuPrincipal.setTitle("Menu Principal");
-		frmMenuPrincipal.setBounds(100, 100, 350, 200);
+		frmMenuPrincipal.setBounds(100, 100, 350, 210);
 		frmMenuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMenuPrincipal.getContentPane().setLayout(null);
 		
@@ -53,6 +53,7 @@ public class TelaMenuPrincipal {
 		btnMenuDeClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaMenuClientes.main(null);
+				frmMenuPrincipal.dispose();
 			}
 		});
 		btnMenuDeClientes.setBounds(80, 40, 180, 30);
@@ -61,12 +62,20 @@ public class TelaMenuPrincipal {
 		JButton btnMenuDeTelefones = new JButton("Menu de Telefones");
 		btnMenuDeTelefones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaMenuTelefones.main(null);
+				frmMenuPrincipal.dispose();
 			}
 		});
 		btnMenuDeTelefones.setBounds(80, 80, 180, 30);
 		frmMenuPrincipal.getContentPane().add(btnMenuDeTelefones);
 		
 		JButton btnMenuDeEndereos = new JButton("Menu de Endere\u00E7os");
+		btnMenuDeEndereos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuEnderecos.main(null);
+				frmMenuPrincipal.dispose();
+			}
+		});
 		btnMenuDeEndereos.setBounds(80, 120, 180, 30);
 		frmMenuPrincipal.getContentPane().add(btnMenuDeEndereos);
 	}

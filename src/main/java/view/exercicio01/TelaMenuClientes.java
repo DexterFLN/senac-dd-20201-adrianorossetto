@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import principal.exercicio01.Executavel;
 
@@ -44,7 +45,7 @@ public class TelaMenuClientes {
 	private void initialize() {
 		frmMenuDeClientes = new JFrame();
 		frmMenuDeClientes.setTitle("Menu de Clientes");
-		frmMenuDeClientes.setBounds(100, 100, 300, 250);
+		frmMenuDeClientes.setBounds(100, 100, 300, 350);
 		frmMenuDeClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMenuDeClientes.getContentPane().setLayout(null);
 		
@@ -55,7 +56,8 @@ public class TelaMenuClientes {
 		JButton btnCadastrarNovoCliente = new JButton("Cadastrar Novo Cliente");
 		btnCadastrarNovoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Executavel.obterClienteDaTela();
+				TelaCadastroClientes.main(null);
+				frmMenuDeClientes.dispose();
 			}
 		});
 		btnCadastrarNovoCliente.setBounds(50, 50, 200, 30);
@@ -64,14 +66,41 @@ public class TelaMenuClientes {
 		JButton btnAlterarCliente = new JButton("Alterar Cliente");
 		btnAlterarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Módulo em construção. Volte mais tarde!");
 			}
 		});
 		btnAlterarCliente.setBounds(50, 100, 200, 30);
 		frmMenuDeClientes.getContentPane().add(btnAlterarCliente);
 		
 		JButton btnExcluirCliente = new JButton("Excluir Cliente");
+		btnExcluirCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExclusaoClientes.main(null);
+				frmMenuDeClientes.dispose();
+			}
+		});
 		btnExcluirCliente.setBounds(50, 150, 200, 30);
 		frmMenuDeClientes.getContentPane().add(btnExcluirCliente);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuPrincipal.main(null);
+				frmMenuDeClientes.dispose();
+			}
+		});
+		btnVoltar.setBounds(50, 250, 200, 30);
+		frmMenuDeClientes.getContentPane().add(btnVoltar);
+		
+		JButton btnListarClientes = new JButton("Listar Clientes");
+		btnListarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListagemClientes.main(null);
+				frmMenuDeClientes.dispose();
+			}
+		});
+		btnListarClientes.setBounds(50, 200, 200, 30);
+		frmMenuDeClientes.getContentPane().add(btnListarClientes);
 	}
 
 }
