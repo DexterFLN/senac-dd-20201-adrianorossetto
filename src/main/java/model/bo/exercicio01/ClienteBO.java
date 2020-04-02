@@ -30,8 +30,18 @@ public class ClienteBO {
 		return dao.consultarTodos();
 	}
 
-	public void salvar(Cliente cliente) {
-		// TODO Auto-generated method stub
+	public String salvar(Cliente cliente) {
+		String mensagem = "";
+
+		cliente = dao.salvar(cliente);
+
+		if (cliente.getId() > 0) {
+			mensagem = "Cliente salvo com sucesso";
+		} else {
+			mensagem = "Erro ao salvar";
+		}
+
+		return mensagem;
 		
 	}
 
