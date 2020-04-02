@@ -10,9 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.exercicio01.ClienteController;
 import controller.exercicio01.TelefoneController;
-import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Telefone;
 
 public class TelaListagemTelefones {
@@ -33,7 +31,7 @@ public class TelaListagemTelefones {
 
 		for (Telefone t : telefones) {
 
-			Object[] novaLinhaDaTabela = new Object[3];
+			Object[] novaLinhaDaTabela = new Object[6];
 			novaLinhaDaTabela[0] = t.getCodigoPais();
 			novaLinhaDaTabela[1] = t.getDdd();
 			novaLinhaDaTabela[2] = t.getNumero();

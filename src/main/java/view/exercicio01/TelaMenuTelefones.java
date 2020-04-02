@@ -70,6 +70,11 @@ public class TelaMenuTelefones {
 		frmMenuDeTelefone.getContentPane().add(btnAlterarTelefone);
 		
 		JButton btnExcluirTelefone = new JButton("Excluir Telefone");
+		btnExcluirTelefone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Módulo em construção. Volte mais tarde!");
+			}
+		});
 		btnExcluirTelefone.setBounds(50, 150, 200, 30);
 		frmMenuDeTelefone.getContentPane().add(btnExcluirTelefone);
 		

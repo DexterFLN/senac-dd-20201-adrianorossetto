@@ -23,7 +23,7 @@ public class Executavel {
 
 		// executarExercicio2();
 
-		obterTelefoneDaTela();
+		executarMenuPrincipal();
 	}
 
 	private static void executarMenuPrincipal() {
