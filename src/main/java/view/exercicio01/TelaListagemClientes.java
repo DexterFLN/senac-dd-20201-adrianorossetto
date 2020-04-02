@@ -84,7 +84,7 @@ public class TelaListagemClientes {
 				atualizarTabelaClientes();
 			}
 		});
-		btnBuscar.setBounds(230, 30, 120, 30);
+		btnBuscar.setBounds(200, 30, 120, 30);
 		frmListagemDeClientes.getContentPane().add(btnBuscar);
 
 		tblClientes = new JTable();
