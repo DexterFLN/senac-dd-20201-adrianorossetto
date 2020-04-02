@@ -166,21 +166,13 @@ public class TelaCadastroEndereco extends JFrame {
 		ArrayList<String> siglasEstados = new ArrayList<String>();
 
 		siglasEstados.add("AC");
-		siglasEstados.add("AM");
 		siglasEstados.add("BA");
 		siglasEstados.add("CE");
 		siglasEstados.add("DF");
-		siglasEstados.add("ES");
 		siglasEstados.add("GO");
-		siglasEstados.add("MG");
-		siglasEstados.add("MS");
-		siglasEstados.add("MT");
 		siglasEstados.add("PR");
-		siglasEstados.add("RJ");
-		siglasEstados.add("RS");
 		siglasEstados.add("SC");
-		siglasEstados.add("SP");
-
+		siglasEstados.add("RS");
 
 		// e assim por diante...
 

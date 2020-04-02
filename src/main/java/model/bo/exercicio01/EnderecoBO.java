@@ -5,7 +5,7 @@ import model.dao.exercicio01.EnderecoDAO;
 import model.entity.exercicio01.Endereco;
 
 public class EnderecoBO {
-	
+
 	private EnderecoDAO dao = new EnderecoDAO();
 
 	public String excluir(int idSelecionado) {
