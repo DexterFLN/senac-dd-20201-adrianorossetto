@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.exercicio01.ClienteController;
@@ -98,17 +100,16 @@ public class TelaCadastroClientes {
 		cblEndereco.setBounds(100, 140, 370, 20);
 		frmCadastroCliente.getContentPane().add(cblEndereco);
 		
-		JButton btnCadastrarCliente = new JButton("Cadastrar");
-		btnCadastrarCliente.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
-				controller.salvar(txtNome.getText(), txtSobrenome.getText(), txtCPF.getText(), new ArrayList<Telefone>(), (String) cblEndereco.getSelectedItem());
-				
+				controller.salvar(txtNome.getText(), txtSobrenome.getText(), txtCPF.getText(), (Endereco) cblEndereco.getSelectedItem());
 				
 			}
 		});
-		btnCadastrarCliente.setBounds(130, 180, 90, 25);
-		frmCadastroCliente.getContentPane().add(btnCadastrarCliente);
+		btnSalvar.setBounds(130, 180, 90, 25);
+		frmCadastroCliente.getContentPane().add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {

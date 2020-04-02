@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.bo.exercicio01.ClienteBO;
 import model.dao.exercicio01.ClienteDAO;
 import model.entity.exercicio01.Cliente;
+import model.entity.exercicio01.Endereco;
 import model.entity.exercicio01.Telefone;
 
 public class ClienteController {
@@ -27,9 +28,25 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	public void salvar(String nome, String sobrenome, String cpf, ArrayList<Telefone> telefone, String endereco) {
-		// TODO Auto-generated method stub
+	public String salvar(String nome, String sobrenome, String cpf, Object endereco) {
+		String mensagem = "";
 		
+		ClienteBO bo = new ClienteBO();
+		Cliente cliente = criarCliente(nome, sobrenome, cpf, endereco);
+		bo.salvar(cliente);
+		return mensagem;
+		
+	}
+
+	private Cliente criarCliente(String nome, String sobrenome, String cpf, Object endereco) {
+		Cliente cliente = new Cliente();
+		cliente.setNome(nome);
+		cliente.setSobrenome(sobrenome);
+		cliente.setCpf(cpf);
+		
+		Endereco enderecoSelecionado = (Endereco) endereco;
+		cliente.setEndereco(enderecoSelecionado);
+		return cliente;
 	}
 	
 }

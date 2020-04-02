@@ -30,6 +30,11 @@ public class ClienteBO {
 		return dao.consultarTodos();
 	}
 
+	public void salvar(Cliente cliente) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	// TODO criar os métodos para chamar os métodos PÚBLICOS no ClienteDAO
