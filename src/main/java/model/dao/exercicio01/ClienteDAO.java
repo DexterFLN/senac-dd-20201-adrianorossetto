@@ -17,7 +17,7 @@ public class ClienteDAO {
 	public Cliente salvar(Cliente novoCliente) {
 		Connection conexao = Banco.getConnection();
 		String sql = " INSERT INTO CLIENTE(NOME, SOBRENOME, CPF, IDENDERECO) "
-				+ " VALUES (?,?,?,?) ";
+				+ " VALUES (?,?,?,?)";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql, 
 				PreparedStatement.RETURN_GENERATED_KEYS);
 		try {
@@ -32,12 +32,9 @@ public class ClienteDAO {
 			if(rs.next()) {
 				int idGerado = rs.getInt(1);
 				novoCliente.setId(idGerado);
-
-				if (!novoCliente.getTelefones().isEmpty()) {
-					TelefoneDAO telefoneDAO = new TelefoneDAO();
-					telefoneDAO.ativarTelefones(novoCliente, novoCliente.getTelefones());
-				}
 			}
+			System.out.println("Cliente cadastrado com sucesso!");
+			// TODO ao salvar um cliente temos que marcar os telefones que ele possui!
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo cliente.");
 			System.out.println("Erro: " + e.getMessage());
@@ -46,32 +43,12 @@ public class ClienteDAO {
 		return novoCliente;
 	}
 
-	public boolean excluir(int id) {
-		Connection conn = Banco.getConnection();
-		String sql = "DELETE FROM CLIENTE WHERE ID= " + id;
-		Statement stmt = Banco.getStatement(conn);
-		
-		int quantidadeLinhasAfetadas = 0;
-		try {
-			quantidadeLinhasAfetadas = stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			System.out.println("Erro ao excluir cliente.");
-			System.out.println("Erro: " + e.getMessage());
-		}
-		
-		boolean excluiu = quantidadeLinhasAfetadas > 0;
 
-		if (excluiu) {
-			TelefoneDAO telefoneDAO = new TelefoneDAO();
-			telefoneDAO.desativarTelefones(id);
-		}
-
-		return excluiu;
-	}
 
 	public boolean alterar(Cliente cliente) {
 		Connection conexao = Banco.getConnection();
-		String sql = " UPDATE CLIENTE SET NOME=?, SOBRENOME=?, CPF=?, IDENDERECO=? "
+		String sql = " UPDATE CLIENTE"
+				+ "SET NOME=?, SOBRENOME=?, CPF=?, IDENDERECO=? "
 				+ " WHERE ID = ?";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
 		int registrosAlterados = 0;
@@ -83,8 +60,7 @@ public class ClienteDAO {
 			stmt.setInt(5, cliente.getId());
 			registrosAlterados = stmt.executeUpdate();
 			 
-			TelefoneDAO telefoneDAO = new TelefoneDAO();
-			telefoneDAO.ativarTelefones(cliente, cliente.getTelefones());
+			// TODO atualizar a relação de telefones que o cliente possui
 
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo cliente.");
@@ -94,29 +70,14 @@ public class ClienteDAO {
 		return registrosAlterados > 0;
 	}
 
-	public Cliente consultarPorId(int id) throws SQLException {
-		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM CLIENTE WHERE id = " + id;
-		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
-
-		Cliente cliente = null;
-		try {
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				cliente = construirClienteDoResultSet(rs);
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Erro ao consultar cliente com id: " + id);
-			System.out.println("Erro: " + e.getMessage());
-		}
-		conexao.close();
-		return cliente;
+	public Cliente consultarPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public ArrayList<Cliente> consultarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = "SELECT * FROM CLIENTE";
+		String sql = " SELECT * FROM CLIENTE ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
 		
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -167,6 +128,7 @@ public class ClienteDAO {
 	}
 
 	public boolean cpfJaUtilizado(String cpf) {
+		
 		Connection conexao = Banco.getConnection();
 		String sql = " select id from cliente c " + 
 				"where c.cpf = '" + cpf + "'";
@@ -183,37 +145,52 @@ public class ClienteDAO {
 		return cpfUsado;
 	}
 
-	public boolean temClienteMorandoNoEndereco(int idEndereco) {
+	
+	public boolean excluir(Cliente cliente ) {
+		String sql = " DELETE FROM cliente WHERE id = ?";
+
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT id FROM CLIENTE c " + " WHERE c.idEndereco = " + idEndereco;
-		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
-
-		boolean enderecoJaUsado = false;
-
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
+		boolean excluiu = false;
 		try {
-			ResultSet rs = stmt.executeQuery();
-			enderecoJaUsado = rs.next();
-		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se endereço já foi usado. Causa: " + e.getMessage());
-		}
+			preparedStatement.setInt(1, cliente.getId());
+			int codigoRetornoUpdate = preparedStatement.executeUpdate();
 
-		return enderecoJaUsado;
+			excluiu = (codigoRetornoUpdate == Banco.CODIGO_RETORNO_SUCESSO_EXCLUSAO);
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao excluir cliente. Id: " + cliente + " .Causa: " + ex.getMessage());
+		}
+		return excluiu;
 	}
 
-	public boolean temClienteCadastradoComEsteID(int idSelecionado) {
+	public boolean temClienteCadastradoComCpfUsado(String cpf) {
+		String sql = " SELECT cpf FROM cliente WHERE cpf = " + cpf;
+
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT id FROM CLIENTE c " + " WHERE c.id = " + idSelecionado;
-		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
 
-		boolean clienteNaoCadastrado = false;
-
+		boolean clienteJaCadastrado = false;
 		try {
-			ResultSet rs = stmt.executeQuery();
-			clienteNaoCadastrado = rs.next();
-		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se endereço já foi usado. Causa: " + e.getMessage());
+			ResultSet conjuntoResultante = preparedStatement.executeQuery();
+			clienteJaCadastrado = conjuntoResultante.next();
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao verificar se cliente consta no banco. Causa: " + ex.getMessage());
 		}
 
-		return clienteNaoCadastrado;
+		return clienteJaCadastrado;
 	}
+
+
+
+	
+
+	
+
+
+
+
+	
+
+
+
 }

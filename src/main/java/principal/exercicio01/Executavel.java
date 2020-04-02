@@ -38,6 +38,8 @@ public class Executavel {
 	 * Obs.: ainda está violando o MVC, pois chama um BO (da camada model), o
 	 * correto é chamar um controller.
 	 */
+	
+	/*
 	private static void executarExercicio2() {
 		Cliente cliente1 = obterClienteDaTela();
 
@@ -47,7 +49,8 @@ public class Executavel {
 
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
-
+	 */
+	
 	/**
 	 * Exercício 3 - Cadastro de telefones com JOptionPane
 	 * 
@@ -55,6 +58,8 @@ public class Executavel {
 	 * 
 	 * Salvar telefones com e sem dono.
 	 */
+	
+	/*
 	private static void executarExercicio3() {
 		Telefone novoTelefone = obterTelefoneDaTela();
 
@@ -63,7 +68,9 @@ public class Executavel {
 
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
-
+	*/
+	
+	/*
 	private static Telefone obterTelefoneDaTela() {
 		Telefone novoTelefone = new Telefone();
 
@@ -96,7 +103,9 @@ public class Executavel {
 
 		return novoTelefone;
 	}
-
+	*/
+	
+	/*
 	public static Cliente obterClienteDaTela() {
 		String nome = JOptionPane.showInputDialog("Informe o nome");
 		String sobrenome = JOptionPane.showInputDialog("Informe o sobrenome");
@@ -113,4 +122,6 @@ public class Executavel {
 
 		return novoCliente;
 	}
+	*/
 }
+	

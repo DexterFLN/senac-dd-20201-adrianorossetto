@@ -4,15 +4,15 @@ import model.dao.exercicio01.TelefoneDAO;
 import model.entity.exercicio01.Telefone;
 
 public class TelefoneBO {
-	
+
 	private TelefoneDAO dao = new TelefoneDAO();
 
-	public String salvar(Telefone novoTelefone) {
+	public String salvar(Telefone telefone) {
 		String mensagem = "";
 
-		novoTelefone = dao.salvar(novoTelefone);
+		telefone = dao.salvar(telefone);
 
-		if (novoTelefone.getId() > 0) {
+		if (telefone.getId() > 0) {
 			mensagem = "Telefone cadastrado com sucesso";
 		} else {
 			mensagem = "Erro ao cadastrar telefone";
@@ -20,5 +20,9 @@ public class TelefoneBO {
 		return mensagem;
 	}
 
-	// TODO criar os métodos para chamar os métodos PÚBLICOS no TelefoneDAO
+	public String salvar(String dono, String codigoPais, String ddd, String numero, boolean movel, boolean ativo) {
+		
+		return null;
+	}
+
 }
