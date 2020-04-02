@@ -53,7 +53,7 @@ public class TelaMenuTelefones {
 		JButton btnCadastrarTelefone = new JButton("Cadastrar Telefone");
 		btnCadastrarTelefone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroTelefone.main(null);
+				TelaCadastroTelefones.main(null);
 				frmMenuDeTelefone.dispose();
 			}
 		});

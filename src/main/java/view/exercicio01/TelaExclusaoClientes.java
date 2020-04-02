@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 public class TelaExclusaoClientes {
 
 	private JFrame frmExclusaoClientes;
-	private JTextField txtIdExcluirCliente;
+	private JComboBox cblCliente;
 
 	/**
 	 * Launch the application.
@@ -57,21 +57,23 @@ public class TelaExclusaoClientes {
 		frmExclusaoClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmExclusaoClientes.getContentPane().setLayout(null);
 		
-		JLabel lblExcluirCliente = new JLabel("Digite o id do cliente que deseja excluir:");
+		JLabel lblExcluirCliente = new JLabel("Selecione o cliente que deseja excluir:");
 		lblExcluirCliente.setBounds(35, 35, 270, 15);
 		frmExclusaoClientes.getContentPane().add(lblExcluirCliente);
 		
-		txtIdExcluirCliente = new JTextField();
-		txtIdExcluirCliente.setBounds(35, 60, 270, 20);
-		frmExclusaoClientes.getContentPane().add(txtIdExcluirCliente);
-		txtIdExcluirCliente.setColumns(10);
+		ClienteController clienteControladora = new ClienteController();
+		ArrayList<Cliente> clientes = clienteControladora.listarTodosOsClientes();
+		
+		cblCliente = new JComboBox(clientes.toArray());
+		cblCliente.setBounds(35, 60, 280, 25);
+		frmExclusaoClientes.getContentPane().add(cblCliente);
 		
 		JButton btnExcluirCliente = new JButton("Excluir");
 		btnExcluirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ClienteController controladora = new ClienteController();
 
-				String mensagem = controladora.excluir(txtIdExcluirCliente.getText());
+				String mensagem = controladora.excluir((Cliente) cblCliente.getSelectedItem());
 				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
@@ -85,15 +87,10 @@ public class TelaExclusaoClientes {
 				frmExclusaoClientes.dispose();
 			}
 		});
-		btnCancelarExclusao.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frmExclusaoClientes.dispose();
-			}
-		});
-		
 		btnCancelarExclusao.setBounds(180, 115, 90, 25);
 		frmExclusaoClientes.getContentPane().add(btnCancelarExclusao);
+		
+		
 		
 		
 	}

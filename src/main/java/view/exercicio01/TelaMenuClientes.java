@@ -56,7 +56,7 @@ public class TelaMenuClientes {
 		JButton btnCadastrarNovoCliente = new JButton("Cadastrar Novo Cliente");
 		btnCadastrarNovoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroClientes.main(null);
+				TelaCadastroCliente.main(null);
 				frmMenuDeClientes.dispose();
 			}
 		});

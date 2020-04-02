@@ -58,8 +58,8 @@ public class TelefoneController {
 	public String validarNumero(String numero) {
 		String mensagem = "";
 		
-		if(numero.length() != 9) {
-			mensagem = "O campo de NUMERO deve possuir até 9 dígitos.\n";
+		if(numero.length() < 8 || numero.length() > 9) {
+			mensagem = "O campo de NUMERO deve possuir 8 ou 9 dígitos.\n";
 			JOptionPane.showMessageDialog(null, mensagem);
 		}
 		return mensagem;

@@ -77,7 +77,7 @@ public class ClienteDAO {
 
 	public ArrayList<Cliente> consultarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM CLIENTE ";
+		String sql = " SELECT id, nome, sobrenome, cpf, idEndereco " + " FROM CLIENTE ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
 		
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
@@ -178,6 +178,25 @@ public class ClienteDAO {
 		}
 
 		return clienteJaCadastrado;
+	}
+
+
+
+	public boolean temClienteMorandoNoEndereco(int idEndereco) {
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT id FROM CLIENTE c " + " WHERE c.idEndereco = " + idEndereco;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+
+		boolean enderecoJaUsado = false;
+
+		try {
+			ResultSet rs = stmt.executeQuery();
+			enderecoJaUsado = rs.next();
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar se endereço já foi usado. Causa: " + e.getMessage());
+		}
+
+		return enderecoJaUsado;
 	}
 
 

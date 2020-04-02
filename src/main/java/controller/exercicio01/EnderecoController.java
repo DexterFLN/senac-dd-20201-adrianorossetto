@@ -13,10 +13,10 @@ public class EnderecoController {
 
 	private EnderecoBO bo = new EnderecoBO();
 
-	public String excluir(String textoIdSelecionado) {
+	public String excluir(Endereco endereco) {
 		String mensagem = "";
 		try {
-			int idSelecionado = Integer.parseInt(textoIdSelecionado);
+			int idSelecionado = endereco.getId();
 			mensagem = bo.excluir(idSelecionado);
 		} catch (NumberFormatException ex) {
 			mensagem = "Informe um número inteiro";

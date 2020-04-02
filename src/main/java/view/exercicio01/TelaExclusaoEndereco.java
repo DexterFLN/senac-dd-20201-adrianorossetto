@@ -12,11 +12,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.exercicio01.EnderecoController;
+import model.dao.exercicio01.EnderecoDAO;
+import model.entity.exercicio01.Endereco;
+
+import javax.swing.JComboBox;
 
 public class TelaExclusaoEndereco {
 
 	private JFrame frmExclusaoEnderecos;
-	private JTextField txtIdEndereco;
+	private JComboBox cbEndereco;
 
 	/**
 	 * Launch the application.
@@ -47,30 +51,30 @@ public class TelaExclusaoEndereco {
 	private void initialize() {
 		frmExclusaoEnderecos = new JFrame();
 		frmExclusaoEnderecos.setTitle("Exclusão de endereços");
-		frmExclusaoEnderecos.setBounds(100, 100, 310, 150);
+		frmExclusaoEnderecos.setBounds(100, 100, 310, 175);
 		frmExclusaoEnderecos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmExclusaoEnderecos.getContentPane().setLayout(null);
 
-		JLabel lblIdEndereco = new JLabel("Informe o id:");
+		JLabel lblIdEndereco = new JLabel("Selecione o endere\u00E7o que deseja excluir:");
 		lblIdEndereco.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblIdEndereco.setBounds(30, 30, 80, 15);
+		lblIdEndereco.setBounds(30, 30, 250, 15);
 		frmExclusaoEnderecos.getContentPane().add(lblIdEndereco);
 
-		txtIdEndereco = new JTextField();
-		txtIdEndereco.setBounds(120, 30, 150, 20);
-		frmExclusaoEnderecos.getContentPane().add(txtIdEndereco);
-		txtIdEndereco.setColumns(10);
-
+		EnderecoDAO dao = new EnderecoDAO();
+		cbEndereco = new JComboBox(dao.consultarTodos().toArray());
+		cbEndereco.setBounds(30, 50, 250, 22);
+		frmExclusaoEnderecos.getContentPane().add(cbEndereco);
+		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EnderecoController controladora = new EnderecoController();
 				
-				String mensagem = controladora.excluir(txtIdEndereco.getText());
+				String mensagem = controladora.excluir((Endereco) cbEndereco.getSelectedItem());
 				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
-		btnExcluir.setBounds(50, 75, 90, 25);
+		btnExcluir.setBounds(50, 95, 90, 25);
 		frmExclusaoEnderecos.getContentPane().add(btnExcluir);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -80,7 +84,8 @@ public class TelaExclusaoEndereco {
 				frmExclusaoEnderecos.dispose();
 			}
 		});
-		btnCancelar.setBounds(170, 75, 90, 25);
+		btnCancelar.setBounds(170, 95, 90, 25);
 		frmExclusaoEnderecos.getContentPane().add(btnCancelar);
+		
 	}
 }

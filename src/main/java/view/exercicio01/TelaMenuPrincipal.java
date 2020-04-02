@@ -41,7 +41,7 @@ public class TelaMenuPrincipal {
 	private void initialize() {
 		frmMenuPrincipal = new JFrame();
 		frmMenuPrincipal.setTitle("Menu Principal");
-		frmMenuPrincipal.setBounds(100, 100, 350, 210);
+		frmMenuPrincipal.setBounds(100, 100, 350, 240);
 		frmMenuPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMenuPrincipal.getContentPane().setLayout(null);
 		
@@ -78,5 +78,14 @@ public class TelaMenuPrincipal {
 		});
 		btnMenuDeEndereos.setBounds(80, 120, 180, 30);
 		frmMenuPrincipal.getContentPane().add(btnMenuDeEndereos);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmMenuPrincipal.dispose();
+			}
+		});
+		btnSair.setBounds(80, 160, 180, 30);
+		frmMenuPrincipal.getContentPane().add(btnSair);
 	}
 }

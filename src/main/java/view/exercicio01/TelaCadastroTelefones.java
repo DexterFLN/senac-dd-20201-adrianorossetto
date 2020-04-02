@@ -7,10 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.exercicio01.ClienteController;
 import controller.exercicio01.TelefoneController;
 import model.dao.exercicio01.ClienteDAO;
+import model.entity.exercicio01.Cliente;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class TelaCadastroTelefones extends JFrame {
 
@@ -26,7 +30,9 @@ public class TelaCadastroTelefones extends JFrame {
 	private JTextField txtDdd;
 	private JTextField txtCodigoPais;
 	private JTextField txtNumero;
-	private JComboBox cbDono;
+	private JCheckBox chckbxTelefoneMovel;
+	private JCheckBox chckbxTelefoneAtivo;
+	
 
 	/**
 	 * Launch the application.
@@ -50,89 +56,91 @@ public class TelaCadastroTelefones extends JFrame {
 	public TelaCadastroTelefones() {
 		setTitle("Cadastramento de Telefones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 540, 305);
+		setBounds(100, 100, 300, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblDdd = new JLabel("DDD:");
-		lblDdd.setBounds(10, 60, 56, 14);
+		lblDdd.setBounds(30, 50, 50, 15);
 		contentPane.add(lblDdd);
 		
 		txtDdd = new JTextField();
-		txtDdd.setBounds(76, 57, 86, 20);
+		txtDdd.setBounds(100, 50, 150, 20);
 		contentPane.add(txtDdd);
 		txtDdd.setColumns(10);
 		
-		JLabel lblCodigoPais = new JLabel("CodigoPais:");
-		lblCodigoPais.setBounds(5, 11, 73, 14);
+		JLabel lblCodigoPais = new JLabel("DDI:");
+		lblCodigoPais.setBounds(30, 20, 50, 15);
 		contentPane.add(lblCodigoPais);
 		
 		txtCodigoPais = new JTextField();
-		txtCodigoPais.setBounds(76, 8, 86, 20);
+		txtCodigoPais.setBounds(100, 20, 150, 20);
 		contentPane.add(txtCodigoPais);
 		txtCodigoPais.setColumns(10);
 		
 		JLabel lblNumero = new JLabel("Numero: ");
-		lblNumero.setBounds(10, 100, 56, 14);
+		lblNumero.setBounds(30, 80, 55, 15);
 		contentPane.add(lblNumero);
 		
 		txtNumero = new JTextField();
-		txtNumero.setBounds(76, 97, 86, 20);
+		txtNumero.setBounds(100, 80, 150, 20);
 		contentPane.add(txtNumero);
 		txtNumero.setColumns(10);
 		
-		JLabel lblAtivo = new JLabel("Ativo:");
-		lblAtivo.setBounds(207, 11, 35, 14);
-		contentPane.add(lblAtivo);
-		
-		JLabel lblMovel = new JLabel("Movel:");
-		lblMovel.setBounds(207, 60, 42, 14);
-		contentPane.add(lblMovel);
-		
 		ClienteDAO dao = new ClienteDAO();
-		cbDono = new JComboBox(dao.consultarTodos().toArray());
-		cbDono.setBounds(249, 94, 265, 27);
-		contentPane.add(cbDono);
 		
-		final JRadioButton rdbtnAtivo = new JRadioButton("Telefone \u00E9 Ativo");
-		rdbtnAtivo.setBounds(249, 7, 109, 23);
-		rdbtnAtivo.setSelected(true);
-		contentPane.add(rdbtnAtivo);
+		chckbxTelefoneMovel = new JCheckBox("Telefone M\u00F3vel");
+		chckbxTelefoneMovel.setBounds(70, 120, 150, 25);
+		contentPane.add(chckbxTelefoneMovel);
 		
-		final JRadioButton rdbtnMovel = new JRadioButton("Telefone \u00E9 Movel");
-		rdbtnMovel.setBounds(249, 56, 126, 23);
-		rdbtnMovel.setSelected(true);
-		contentPane.add(rdbtnMovel);
+		chckbxTelefoneAtivo = new JCheckBox("Telefone Ativo");
+		chckbxTelefoneAtivo.setBounds(70, 150, 150, 25);
+		contentPane.add(chckbxTelefoneAtivo);
 		
-		JButton btnSalvar = new JButton("SALVAR");
+		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mensagem = "";
-				
 				TelefoneController controller = new TelefoneController();
+				Cliente clienteSelecionado = new Cliente();
+				
+				if(chckbxTelefoneAtivo.isSelected()) {
+					ClienteController clienteControladora = new ClienteController();
+					ArrayList<Cliente> clientes = clienteControladora.listarTodosOsClientes();
+
+					clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, "Selecione um cliente", "Clientes",
+							JOptionPane.QUESTION_MESSAGE, null, clientes.toArray(), null);
+				} else {
+					clienteSelecionado = null;
+				}
+				
 				mensagem += controller.validarCodigoPais(txtCodigoPais.getText());
 				mensagem += controller.validarDdd(txtDdd.getText());
 				mensagem += controller.validarNumero(txtNumero.getText());
 				mensagem += controller.validarNumeroObrigatorio(txtNumero.getText());
 				if(mensagem.isEmpty()) {
-					controller.salvarTelefone(cbDono.getSelectedItem(),txtCodigoPais.getText(), txtDdd.getText(), txtNumero.getText(), rdbtnAtivo.isSelected(), rdbtnMovel.isSelected());
+					controller.salvarTelefone(clienteSelecionado,txtCodigoPais.getText(), txtDdd.getText(), txtNumero.getText(), chckbxTelefoneAtivo.isSelected(), chckbxTelefoneMovel.isSelected());
 				}
 								
 			}
 		});
-		btnSalvar.setBounds(151, 170, 155, 63);
+		btnSalvar.setBounds(55, 180, 180, 25);
 		contentPane.add(btnSalvar);
 		
-	
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuTelefones.main(null);
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(55, 220, 180, 25);
+		contentPane.add(btnCancelar);
 		
-		JLabel lblDono = new JLabel("Dono:");
-		lblDono.setBounds(207, 100, 35, 14);
-		contentPane.add(lblDono);
+		
 		
 		
 	}
-
-	
 }
