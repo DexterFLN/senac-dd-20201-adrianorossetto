@@ -2,15 +2,19 @@ package principal.exercicio01;
 
 import java.util.ArrayList;
 
+
 import javax.swing.JOptionPane;
 
 import controller.exercicio01.ClienteController;
 import controller.exercicio01.TelefoneController;
 import model.bo.exercicio01.ClienteBO;
+import model.dao.exercicio01.ClienteDAO;
 import model.dao.exercicio01.EnderecoDAO;
 import model.entity.exercicio01.Cliente;
 import model.entity.exercicio01.Endereco;
 import model.entity.exercicio01.Telefone;
+import view.exercicio01.TelaMenuPrincipal;
+
 import java.util.List;
 
 public class Executavel {
@@ -19,7 +23,11 @@ public class Executavel {
 
 		// executarExercicio2();
 
-		executarExercicio3();
+		obterTelefoneDaTela();
+	}
+
+	private static void executarMenuPrincipal() {
+		TelaMenuPrincipal.main(null);
 	}
 
 	/**
@@ -34,8 +42,8 @@ public class Executavel {
 		Cliente cliente1 = obterClienteDaTela();
 
 		// - Salvar no banco (APENAS TESTES, AINDA VIOLANDO O MVC)
-		ClienteBO clienteBO = new ClienteBO();
-		String mensagem = clienteBO.salvar(cliente1);
+		ClienteDAO clienteDAO = new ClienteDAO();
+		Cliente mensagem = clienteDAO.salvar(cliente1);
 
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
@@ -73,23 +81,23 @@ public class Executavel {
 		novoTelefone.setMovel(opcaoMovel == JOptionPane.YES_OPTION);
 		novoTelefone.setAtivo(opcaoAtivo == JOptionPane.YES_OPTION);
 
-		int opcaoDono = JOptionPane.showConfirmDialog(null, "O telefone possui dono?", "Selecione",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+		//int opcaoDono = JOptionPane.showConfirmDialog(null, "O telefone possui dono?", "Selecione",
+			//	JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
 
-		if (opcaoDono == JOptionPane.YES_OPTION) {
+		if (opcaoAtivo == JOptionPane.YES_OPTION) {
 			ClienteController controlador = new ClienteController();
 			ArrayList<Cliente> clientes = controlador.listarTodosOsClientes();
 
 			Cliente clienteSelecionado = (Cliente) JOptionPane.showInputDialog(null, "Selecione um cliente", "Clientes",
 					JOptionPane.QUESTION_MESSAGE, null, clientes.toArray(), null);
 
-			novoTelefone.setDono(clienteSelecionado);
+	
 		}
 
 		return novoTelefone;
 	}
 
-	private static Cliente obterClienteDaTela() {
+	public static Cliente obterClienteDaTela() {
 		String nome = JOptionPane.showInputDialog("Informe o nome");
 		String sobrenome = JOptionPane.showInputDialog("Informe o sobrenome");
 		String cpf = JOptionPane.showInputDialog("Informe o CPF");

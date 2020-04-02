@@ -65,7 +65,7 @@ public class TelaExclusaoEndereco {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EnderecoController controladora = new EnderecoController();
-
+				
 				String mensagem = controladora.excluir(txtIdEndereco.getText());
 				JOptionPane.showMessageDialog(null, mensagem);
 			}
