@@ -27,24 +27,24 @@ public class ClienteController {
 		return mensagem;
 	}
 
-	public String salvar(String nome, String sobrenome, String cpf, Object endereco) {
+	public String salvar(String txtNome, String txtSobrenome, String txtCpf, Object txtEndereco) {
 		String mensagem = "";
 		
 		ClienteBO bo = new ClienteBO();
-		Cliente cliente = criarCliente(nome, sobrenome, cpf, endereco);
+		Cliente cliente = criarCliente(txtNome, txtSobrenome, txtCpf, txtEndereco);
 		bo.salvar(cliente);
 		return mensagem;
 		
 	}
 
-	private Cliente criarCliente(String nome, String sobrenome, String cpf, Object endereco) {
+	private Cliente criarCliente(String txtNome, String txtSobrenome, String txtCpf, Object txtEndereco) {
 		Cliente cliente = new Cliente();
-		cliente.setNome(nome);
-		cliente.setSobrenome(sobrenome);
-		cliente.setCpf(cpf);
+		cliente.setNome(txtNome);
+		cliente.setSobrenome(txtSobrenome);
+		cliente.setCpf(txtCpf);
 		
-		Endereco enderecoSelecionado = (Endereco) endereco;
-		cliente.setEndereco(enderecoSelecionado);
+		Endereco endereco = (Endereco) txtEndereco;
+		cliente.setEndereco(endereco);
 		return cliente;
 	}
 	

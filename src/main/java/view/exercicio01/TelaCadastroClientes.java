@@ -104,7 +104,7 @@ public class TelaCadastroClientes {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController controller = new ClienteController();
-				controller.salvar(txtNome.getText(), txtSobrenome.getText(), txtCPF.getText(), (Object) cblEndereco.getSelectedItem());
+				controller.salvar(txtNome.getText(), txtSobrenome.getText(), txtCPF.getText(), cblEndereco.getSelectedItem());
 				
 			}
 		});
