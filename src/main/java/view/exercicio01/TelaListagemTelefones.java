@@ -25,7 +25,7 @@ public class TelaListagemTelefones {
 		tblTelefones.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
 	}
 	
-	private void atualizarTabelaClientes() {
+	private void atualizarTabelaTelefones() {
 		limparTabelaTelefones();
 		DefaultTableModel model = (DefaultTableModel) tblTelefones.getModel();
 
@@ -77,22 +77,22 @@ public class TelaListagemTelefones {
 		frmListagemTelefones.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmListagemTelefones.getContentPane().setLayout(null);
 		
+		tblTelefones = new JTable();
+		tblTelefones.setBounds(25, 70, 650, 400);
+		frmListagemTelefones.getContentPane().add(tblTelefones);
+		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelefoneController controller = new TelefoneController();
 				telefones = controller.listarTodosOsTelefones();
 
-				atualizarTabelaClientes();
+				atualizarTabelaTelefones();
 			}
 		});
 		btnBuscar.setBounds(200, 30, 120, 30);
 		frmListagemTelefones.getContentPane().add(btnBuscar);
 
-		tblTelefones = new JTable();
-		tblTelefones.setBounds(25, 70, 650, 400);
-		frmListagemTelefones.getContentPane().add(tblTelefones);
-		
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
