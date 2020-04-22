@@ -222,7 +222,6 @@ public Telefone salvar(Telefone novoTelefone) {
 		telefone = new Telefone();
 		try {
 			telefone.setId(resultadoDaConsulta.getInt("id"));
-
 			ClienteDAO cDAO = new ClienteDAO();
 			Cliente donoDoTelefone = cDAO.consultarPorId(resultadoDaConsulta.getInt("idCliente"));
 			telefone.setDono(donoDoTelefone);
