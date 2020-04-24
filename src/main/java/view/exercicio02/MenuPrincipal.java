@@ -14,10 +14,20 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import view.exercicio01.TelaCadastroTelefones;
+
 public class MenuPrincipal extends JFrame {
 
 	private JDesktopPane desktopPane;
-	public TelaSobreAutor telaSobreAutor = null;
+	private TelaSobreAutor telaSobreAutor;
+	private TelaInternaCadastroCliente telaCadastroCliente;
+	private TelaInternaListarTelefones telaListarTelefones;
+	private TelaInternaCadastroTelefone telaCadastroTelefones;
+	private TelaInternaExclusaoTelefone telaExcluirTelefone;
+	private int contTelaCadastroCliente = 0;
+	private int contTelaCadastroTelefone = 0;
+	private int contTelaExclusaoTelefone = 0;
+	private int contTelaListarTelefone = 0;
 
 	/**
 	 * Launch the application.
@@ -36,6 +46,12 @@ public class MenuPrincipal extends JFrame {
 		});
 	}
 
+	
+	public void setContTelaListarTelefone(int contTelaListarTelefone) {
+		this.contTelaListarTelefone = contTelaListarTelefone;
+	}
+
+
 	/**
 	 * Create the frame.
 	 */
@@ -53,9 +69,21 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem miCadastrarCliente = new JMenuItem("Cadastrar");
 		miCadastrarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaInternaCadastroCliente novaTelinha = new TelaInternaCadastroCliente();
-				desktopPane.add(novaTelinha);
-				novaTelinha.show();
+				if(contTelaCadastroCliente == 0) {
+					contTelaCadastroCliente++;
+					telaCadastroCliente = new TelaInternaCadastroCliente();
+					desktopPane.add(telaCadastroCliente);
+					telaCadastroCliente.show();
+				}
+				if(telaCadastroCliente.isClosed()) {
+					contTelaCadastroCliente--;
+				}
+				if(contTelaCadastroCliente == 0) {
+					contTelaCadastroCliente++;
+					telaCadastroCliente = new TelaInternaCadastroCliente();
+					desktopPane.add(telaCadastroCliente);
+					telaCadastroCliente.show();
+				}
 			}
 		});
 		miCadastrarCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
@@ -70,23 +98,45 @@ public class MenuPrincipal extends JFrame {
 		JMenuItem mntmListarTelefones = new JMenuItem("Listar");
 		mntmListarTelefones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaInternaListarTelefones telaListarTelefones = new TelaInternaListarTelefones();
-				desktopPane.add(telaListarTelefones);
-				telaListarTelefones.show();
-				//TelaListagemTelefones telaListaTelefone = new TelaListagemTelefones();
-				//desktopPane.add(telaListaTelefone);
-				//telaListaTelefone.show();
+				if(contTelaListarTelefone == 0) {
+					contTelaListarTelefone++;
+					telaListarTelefones = new TelaInternaListarTelefones();
+					desktopPane.add(telaListarTelefones);
+					telaListarTelefones.show();
+				} 
+				if (telaListarTelefones.isClosed()) {
+					contTelaListarTelefone--;
+				}
+				if(contTelaListarTelefone == 0) {
+					contTelaListarTelefone++;
+					telaListarTelefones = new TelaInternaListarTelefones();
+					desktopPane.add(telaListarTelefones);
+					telaListarTelefones.show();
+				} 
 			}
 		});
 		mntmListarTelefones.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icones/icons8-card\u00E1pio.png")));
 		mnTelefones.add(mntmListarTelefones);
 		
+		
 		JMenuItem mntmCadastraralterar = new JMenuItem("Cadastrar/Alterar");
 		mntmCadastraralterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaInternaCadastroTelefone telaCadastrarTelefone = new TelaInternaCadastroTelefone();
-				desktopPane.add(telaCadastrarTelefone);
-				telaCadastrarTelefone.show();
+				if(contTelaCadastroTelefone == 0) {
+					contTelaCadastroTelefone++;
+					telaCadastroTelefones = new TelaInternaCadastroTelefone();
+					desktopPane.add(telaCadastroTelefones);
+					telaCadastroTelefones.show();
+				} 
+				if (telaCadastroTelefones.isClosed()) {
+					contTelaCadastroTelefone--;
+				}
+				if(contTelaCadastroTelefone == 0) {
+					contTelaCadastroTelefone++;
+					telaCadastroTelefones = new TelaInternaCadastroTelefone();
+					desktopPane.add(telaCadastroTelefones);
+					telaCadastroTelefones.show();
+				} 
 			}
 		});
 		mntmCadastraralterar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icones/icons8-adicionar-ao-banco-de-dados.png")));
@@ -94,12 +144,22 @@ public class MenuPrincipal extends JFrame {
 		
 		JMenuItem mntmExcluir = new JMenuItem("Excluir");
 		mntmExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TelaInternaExclusaoTelefone telaExcluirTelefone = new TelaInternaExclusaoTelefone();
-				desktopPane.add(telaExcluirTelefone);
-				telaExcluirTelefone.show();
-
+			public void actionPerformed(ActionEvent e) {	
+				if(contTelaExclusaoTelefone == 0) {
+					contTelaExclusaoTelefone++;
+					telaExcluirTelefone = new TelaInternaExclusaoTelefone();
+					desktopPane.add(telaExcluirTelefone);
+					telaExcluirTelefone.show();
+				}
+				if (telaExcluirTelefone.isClosed()) {
+					contTelaExclusaoTelefone--;
+				}
+				if(contTelaExclusaoTelefone == 0) {
+					contTelaExclusaoTelefone++;
+					telaExcluirTelefone = new TelaInternaExclusaoTelefone();
+					desktopPane.add(telaExcluirTelefone);
+					telaExcluirTelefone.show();
+				}
 			}
 		});
 		mntmExcluir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/icones/icons8-\u00E0-esquerda-dentro-de-um-c\u00EDrculo.png")));
@@ -117,24 +177,14 @@ public class MenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent evt) {
 				// TODO mostrar um JFrame com informações do autor
 				
-				if (telaSobreAutor != null) {
+				if(telaSobreAutor == null) {
 					telaSobreAutor = new TelaSobreAutor();
-					telaSobreAutor.setFocusableWindowState(true);
-				} else {
-					telaSobreAutor = new TelaSobreAutor();
-					telaSobreAutor.setFocusableWindowState(true);
+					telaSobreAutor.setVisible(true);
+				} else if (telaSobreAutor != null && !telaSobreAutor.isVisible()) {
+					telaSobreAutor.setVisible(true);
+				} else if (telaSobreAutor.isVisible()) {
+					telaSobreAutor.setVisible(true);
 				}
-				//TelaSobreAutor janelaSobre = null;
-				//janelaSobre = new TelaSobreAutor();
-				//janelaSobre.setVisible(true);
-				//janelaSobre.setFocusableWindowState(true);
-				
-				/*
-					TelaSobreAutor2 telaSobre = new TelaSobreAutor2(this, true);
-					telaSobre.pack();
-					telaSobre.setLocationRelativeTo(null);
-					telaSobre.setVisible(true);
-				*/
 		
 			}
 		});
